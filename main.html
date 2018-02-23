@@ -1,0 +1,87 @@
+<html lang="en">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<style>
+  .col1{
+  background-color: #474e5d;
+  color: black;
+  }
+  #header1{
+    font-family: 'PT Sans', sans-serif;
+    font-size: 19;
+    color: white;
+    font-weight: normal;
+  }
+  #col2{
+    background-color: #B0C4DE  ;
+  }
+</style>
+<script>
+  var uinfo = {
+     uname,
+    pword
+  };
+function validateForm() {
+ uname = document.forms["bufferForm"]["uname"].value;
+ pword = document.forms["bufferForm"]["psw"].value;
+
+  if(uname == "" && pword == ""){
+    alert("Username and password is not filled, please fill it out.");
+    return false;
+  }
+  else if(uname == ""){
+    alert("Username is not filled, please fill it out.");
+    return false;
+  }
+    else if(pword == ""){
+    alert("Password is not filled, please fill it out.");
+    return false;
+  }
+  else
+    return(sending());    // sending();
+};
+function sending(){
+  alert("Fetching POST");
+  var data = new FormData();
+  data.append("json", JSON.stringify(uinfo));
+
+  fetch("www.bufferunderrun.com/Auth/Logon",
+  {
+    method:"POST",
+    body:data
+  })
+  .then(function(res){return res.json();})
+  .then(function(data){alert(JSON.stringify(data))}
+//.catch(function(err) { alert('Oops, something went wrong') })
+    )
+
+  alert("Success!");
+
+}
+
+</script>
+
+<head>
+<h2 id="header1"> BufferUnrderrun</h2>
+</head>
+<body class="col1">
+ <div class="container-fluid">
+   <div class="row">
+    <div class="col-xs-2"> </div>
+     <div class="col-xs-10"> 
+      <form id="bufferForm" onsubmit=" return validateForm()" method="post">
+        <div class="container">
+          <label><b class="header2">Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname">
+          <label><b class = "header2">Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw">
+          <button itype="submit">Login</button>
+        </div>
+      </form>
+     </div>
+     </div>
+     </div>     
+</body>
+</html>
